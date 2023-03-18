@@ -1,0 +1,12 @@
+Django==4.1.6
+PyYAML==6.0
+asgiref==3.6.0
+django-filter==22.1
+djangorestframework==3.14.0
+mysqlclient==2.1.1
+pip==21.2.4
+pytz==2022.7.1
+setuptools==58.1.0
+sqlparse==0.4.3
+tzdata==2022.7
+uritemplate==4.1.1

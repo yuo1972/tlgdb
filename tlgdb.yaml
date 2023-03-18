@@ -1,0 +1,563 @@
+openapi: 3.0.2
+info:
+  title: Studying
+  version: 1.0.0
+  description: "API for all things \u2026"
+paths:
+  /tlg/api/:
+    get:
+      operationId: listTlgs
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: un_name
+        required: false
+        in: query
+        description: un_name
+        schema:
+          type: string
+      - name: inp_num
+        required: false
+        in: query
+        description: inp_num
+        schema:
+          type: string
+      - name: out_num
+        required: false
+        in: query
+        description: out_num
+        schema:
+          type: string
+      - name: inp_chan
+        required: false
+        in: query
+        description: inp_chan
+        schema:
+          type: string
+      - name: out_chan
+        required: false
+        in: query
+        description: out_chan
+        schema:
+          type: string
+      - name: kn
+        required: false
+        in: query
+        description: kn
+        schema:
+          type: string
+      - name: pp
+        required: false
+        in: query
+        description: pp
+        schema:
+          type: string
+      - name: address
+        required: false
+        in: query
+        description: address
+        schema:
+          type: string
+      - name: subscribe
+        required: false
+        in: query
+        description: subscribe
+        schema:
+          type: string
+      - name: datei
+        required: false
+        in: query
+        description: datei
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tlg'
+          description: ''
+      tags:
+      - TlgList
+    post:
+      operationId: createTlg
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tlg'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tlg'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tlg'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tlg'
+          description: ''
+      tags:
+      - TlgList
+  /tlg/api/{id}/:
+    get:
+      operationId: retrieveTlg
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tlg.
+        schema:
+          type: string
+      - name: un_name
+        required: false
+        in: query
+        description: un_name
+        schema:
+          type: string
+      - name: inp_num
+        required: false
+        in: query
+        description: inp_num
+        schema:
+          type: string
+      - name: out_num
+        required: false
+        in: query
+        description: out_num
+        schema:
+          type: string
+      - name: inp_chan
+        required: false
+        in: query
+        description: inp_chan
+        schema:
+          type: string
+      - name: out_chan
+        required: false
+        in: query
+        description: out_chan
+        schema:
+          type: string
+      - name: kn
+        required: false
+        in: query
+        description: kn
+        schema:
+          type: string
+      - name: pp
+        required: false
+        in: query
+        description: pp
+        schema:
+          type: string
+      - name: address
+        required: false
+        in: query
+        description: address
+        schema:
+          type: string
+      - name: subscribe
+        required: false
+        in: query
+        description: subscribe
+        schema:
+          type: string
+      - name: datei
+        required: false
+        in: query
+        description: datei
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tlg'
+          description: ''
+      tags:
+      - TlgList
+    put:
+      operationId: updateTlg
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tlg.
+        schema:
+          type: string
+      - name: un_name
+        required: false
+        in: query
+        description: un_name
+        schema:
+          type: string
+      - name: inp_num
+        required: false
+        in: query
+        description: inp_num
+        schema:
+          type: string
+      - name: out_num
+        required: false
+        in: query
+        description: out_num
+        schema:
+          type: string
+      - name: inp_chan
+        required: false
+        in: query
+        description: inp_chan
+        schema:
+          type: string
+      - name: out_chan
+        required: false
+        in: query
+        description: out_chan
+        schema:
+          type: string
+      - name: kn
+        required: false
+        in: query
+        description: kn
+        schema:
+          type: string
+      - name: pp
+        required: false
+        in: query
+        description: pp
+        schema:
+          type: string
+      - name: address
+        required: false
+        in: query
+        description: address
+        schema:
+          type: string
+      - name: subscribe
+        required: false
+        in: query
+        description: subscribe
+        schema:
+          type: string
+      - name: datei
+        required: false
+        in: query
+        description: datei
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tlg'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tlg'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tlg'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tlg'
+          description: ''
+      tags:
+      - TlgList
+    patch:
+      operationId: partialUpdateTlg
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tlg.
+        schema:
+          type: string
+      - name: un_name
+        required: false
+        in: query
+        description: un_name
+        schema:
+          type: string
+      - name: inp_num
+        required: false
+        in: query
+        description: inp_num
+        schema:
+          type: string
+      - name: out_num
+        required: false
+        in: query
+        description: out_num
+        schema:
+          type: string
+      - name: inp_chan
+        required: false
+        in: query
+        description: inp_chan
+        schema:
+          type: string
+      - name: out_chan
+        required: false
+        in: query
+        description: out_chan
+        schema:
+          type: string
+      - name: kn
+        required: false
+        in: query
+        description: kn
+        schema:
+          type: string
+      - name: pp
+        required: false
+        in: query
+        description: pp
+        schema:
+          type: string
+      - name: address
+        required: false
+        in: query
+        description: address
+        schema:
+          type: string
+      - name: subscribe
+        required: false
+        in: query
+        description: subscribe
+        schema:
+          type: string
+      - name: datei
+        required: false
+        in: query
+        description: datei
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tlg'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tlg'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tlg'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tlg'
+          description: ''
+      tags:
+      - TlgList
+    delete:
+      operationId: destroyTlg
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tlg.
+        schema:
+          type: string
+      - name: un_name
+        required: false
+        in: query
+        description: un_name
+        schema:
+          type: string
+      - name: inp_num
+        required: false
+        in: query
+        description: inp_num
+        schema:
+          type: string
+      - name: out_num
+        required: false
+        in: query
+        description: out_num
+        schema:
+          type: string
+      - name: inp_chan
+        required: false
+        in: query
+        description: inp_chan
+        schema:
+          type: string
+      - name: out_chan
+        required: false
+        in: query
+        description: out_chan
+        schema:
+          type: string
+      - name: kn
+        required: false
+        in: query
+        description: kn
+        schema:
+          type: string
+      - name: pp
+        required: false
+        in: query
+        description: pp
+        schema:
+          type: string
+      - name: address
+        required: false
+        in: query
+        description: address
+        schema:
+          type: string
+      - name: subscribe
+        required: false
+        in: query
+        description: subscribe
+        schema:
+          type: string
+      - name: datei
+        required: false
+        in: query
+        description: datei
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - TlgList
+components:
+  schemas:
+    Tlg:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        un_name:
+          type: string
+          maxLength: 12
+        inp_gate_date:
+          type: string
+          format: date-time
+        inp_chan:
+          type: string
+          maxLength: 12
+        inp_num:
+          type: string
+          maxLength: 4
+        inp_prz:
+          type: string
+          maxLength: 30
+        ref:
+          type: string
+          maxLength: 40
+        kn:
+          type: string
+          maxLength: 30
+        categ:
+          type: string
+          maxLength: 3
+        fl_uved_bool:
+          type: boolean
+        fl_urgent_bool:
+          type: boolean
+        pp:
+          type: string
+        address:
+          type: string
+        subscribe:
+          type: string
+        out_gate_date:
+          type: string
+          format: date-time
+        out_chan:
+          type: string
+          maxLength: 12
+        out_num:
+          type: string
+          maxLength: 4
+        out_prz:
+          type: string
+          maxLength: 30
+      required:
+      - un_name
+      - inp_gate_date
+      - inp_chan
+      - inp_num
+      - inp_prz
+      - ref
+      - kn
+      - categ
+      - pp
+      - address
+      - subscribe
+      - out_gate_date
+      - out_chan
+      - out_num
+      - out_prz
