@@ -1,0 +1,36 @@
+INFO 2023-03-17 11:43:47,871 views >>> 127.0.0.1 -> inpn=123002&outn=&date=2022-08-02
+ERROR 2023-03-17 11:55:30,977 views >>> 127.0.0.1 -> date=2016-12-27 -> !!! тариф не найден (list index out of range)
+ERROR 2023-03-17 11:58:15,903 views >>> 127.0.0.1 -> date=2016-12-27 -> !!! тариф не найден (list index out of range)
+ERROR 2023-03-17 11:58:34,497 views >>> 127.0.0.1 -> date=2016-12-27 -> !!! тариф не найден (list index out of range)
+ERROR 2023-03-17 12:10:25,977 views >>> 127.0.0.1 -> /tlgtarif/tlist/?date=2016-12-07 -> !!! тариф не найден (list index out of range)
+INFO 2023-03-17 12:16:43,307 views >>> 127.0.0.1 -> /tlg/list/?inpn=123002&outn=&date=2022-08-02
+WARNING 2023-03-17 12:25:20,187 views >>> 127.0.0.1 -> /reestr/select/?date=2022-08-01 -> не авторизован
+WARNING 2023-03-17 12:33:48,863 views >>> 127.0.0.1 -> /reestr/select/?date=2022-08-01 -> не авторизован
+WARNING 2023-03-17 12:36:39,499 views >>> 127.0.0.1 -> /reestr/select/?date=2022-08-01 -> нет доступа
+WARNING 2023-03-17 12:42:59,757 views >>> 127.0.0.1 -> /reestr/select/?date=2022-08-01 -> нет доступа
+WARNING 2023-03-17 14:30:23,530 views >>> 127.0.0.1 -> /reestr/select/?date=2022-08-01 -> нет доступа
+WARNING 2023-03-17 14:32:44,181 views >>> 127.0.0.1 -> /reestr/select/?date=2022-08-01 -> не авторизован
+WARNING 2023-03-17 14:34:14,845 views >>> 127.0.0.1 -> /reestr/select/?date=2022-08-01 -> не авторизован
+WARNING 2023-03-17 14:39:38,686 views >>> 127.0.0.1 -> /reestr/select/?date=2022-08-01 -> не авторизован
+INFO 2023-03-17 16:00:01,609 views >>> 127.0.0.1 -> /tlg/list/
+ERROR 2023-03-17 16:00:03,538 views >>> 127.0.0.1 -> /tlgtarif/tlist/?date=2000-01-01 -> !!! тариф не найден (list index out of range)
+INFO 2023-03-17 16:31:31,585 views >>> 127.0.0.1 -> /tlg/list/
+ERROR 2023-03-17 16:31:32,547 views >>> 127.0.0.1 -> /tlgtarif/tlist/?date=2000-01-01 -> !!! тариф не найден (list index out of range)
+WARNING 2023-03-17 16:54:29,825 views >>> 127.0.0.1 -> /reestr/detail/?monthD=2022-08 -> не авторизован
+WARNING 2023-03-17 16:54:31,571 views >>> 127.0.0.1 -> /reestr/billing/?monthB=2022-08 -> не авторизован
+INFO 2023-03-17 16:54:52,691 views >>> 127.0.0.1 -> /tlg/list/?inpn=123002&outn=&date=2022-08-02
+WARNING 2023-03-17 16:58:21,314 views >>> 127.0.0.1 -> /reestr/billing/ -> не авторизован
+WARNING 2023-03-17 16:58:48,356 views >>> 127.0.0.1 -> /reestr/complit/8/ -> не авторизован
+WARNING 2023-03-17 16:59:08,143 views >>> 127.0.0.1 -> /reestr/detail/?monthD=2022-08 -> нет доступа
+WARNING 2023-03-17 16:59:13,265 views >>> 127.0.0.1 -> /reestr/detail/?monthD=2022-08 -> нет доступа
+INFO 2023-03-17 17:01:01,949 views >>> 127.0.0.1 -> /tlg/list/?inpn=123002&outn=&date=2022-08-02
+INFO 2023-03-17 22:43:09,790 views >>> 127.0.0.1 -> /tlg/list/?inpn=123002&outn=&date=2022-08-02
+WARNING 2023-03-17 22:51:17,824 views >>> 127.0.0.1 -> /reestr/select/?date=2022-08-02 -> не авторизован
+WARNING 2023-03-18 20:26:21,849 views >>> 127.0.0.1 -> /reestr/complit/9/ -> не авторизован
+WARNING 2023-03-18 20:28:05,273 views >>> 127.0.0.1 -> /reestr/complit/10/ -> не авторизован
+WARNING 2023-03-18 20:31:31,921 views >>> 127.0.0.1 -> /reestr/complit/13/ -> не авторизован
+WARNING 2023-03-18 20:51:54,512 views >>> 127.0.0.1 -> /reestr/billing/ -> не авторизован
+WARNING 2023-03-18 20:52:13,617 views >>> 127.0.0.1 -> /reestr/list/13/ -> нет доступа
+WARNING 2023-03-18 21:51:47,763 views >>> 127.0.0.1 -> /reestr/detail/ -> не авторизован
+WARNING 2023-03-18 21:52:12,081 views >>> 127.0.0.1 -> /reestr/detail/ -> нет доступа
+WARNING 2023-03-18 21:52:22,485 views >>> 127.0.0.1 -> /reestr/detail/?monthD=2022-08 -> нет доступа

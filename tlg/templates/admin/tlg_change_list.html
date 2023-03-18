@@ -1,0 +1,11 @@
+{% extends 'admin/change_list.html' %}
+
+{% block object-tools-items %}
+    {{ block.super }}
+      <li>
+        <form name="testDB" method="post" action="/tlg/import/">
+            {% csrf_token %}
+            <a href="javascript: document.testDB.submit();" class="addlink">Импорт тестовой БД</a>
+        </form>
+      </li>
+{% endblock %}
