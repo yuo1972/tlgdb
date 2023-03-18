@@ -1,0 +1,33 @@
+@media screen
+{
+   .newspan { background: #dbead5;
+	      padding: 2pt 3pt 2pt 4pt;
+	      border: 3px ridge #089000;
+	      border-radius: 10px;
+	      box-shadow: 4px 4px 9px #171;
+	      position: absolute;
+ 	      font-weight-1: bold;
+   	    }
+
+   ul.errorlist {
+          background: #ff3545;
+   }
+
+   table.t0 {  border: 0px solid #666; }
+   td.t0 {  border: 0px solid #666; }
+
+   td.t1 { padding: 3pt; }
+
+   table {  border: 2px solid #666;
+            border-collapse: collapse;
+         }
+   td { 	background-color-1: #e8ebff;
+	        border: 1px solid #666;
+ 	        border-collapse: collapse;
+	        padding: 4pt;
+      }
+
+
+  .hidescr { display: none;	 }
+}
+

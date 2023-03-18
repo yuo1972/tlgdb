@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+</head>
+<body>
+
+<div class="input-group input-group-lg">
+    <button class="btn btn-danger" type="button" onclick="history.back();">Ошибка</button>
+    <span class="input-group-text" id="err-detail">{{ err_str }}</span>
+</div>
+
+<!-- div align="left" class="bg-danger p-2 bg-opacity-50">Ошибка: {{ err_str }} </div -->
+<!--<h3>Ошибка: {{ err_str }} </h3>-->
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+
+<center><b>Телеграфные тарифы на {{ date }}</b></center>
+<table class="t0">
+<tr>
+<td class="t0">
+    <table class="t1">
+    <tr>
+        <td colspan="2" align="center">Россия</td>
+    </tr>
+    <tr>
+        <td nowrap>обычная, за слово</td>
+        <td>{{ rus_tarif.word_ordinary }}</td>
+    </tr>
+    <tr>
+        <td nowrap>срочная, за слово</tdnowrap>
+        <td>{{ rus_tarif.word_urgent }}</td>
+    </tr>
+    <tr>
+        <td nowrap>обычная, доставка</td>
+        <td>{{ rus_tarif.delivery_ordinary }}</td>
+    </tr>
+    <tr>
+        <td nowrap>срочная, доставка</td>
+        <td>{{ rus_tarif.delivery_urgent }}</td>
+    </tr>
+    <tr>
+        <td nowrap>почтой заказное, доставка</td>
+        <td>{{ rus_tarif.delivery_post }}</td>
+    </tr>
+    <tr>
+        <td nowrap>до востребования, доставка</td>
+        <td>{{ rus_tarif.delivery_box }}</td>
+    </tr>
+    <tr>
+        <td nowrap>уведомление телеграфом</td>
+        <td>{{ rus_tarif.notification_ordinary }}</td>
+    </tr>
+    <tr>
+        <td nowrap>уведомление телеграфом срочное</td>
+        <td>{{ rus_tarif.notification_urgent }}</td>
+    </tr>
+    <tr>
+        <td nowrap>вручить</td>
+        <td>{{ rus_tarif.todate }}</td>
+    </tr>
+    <tr>
+        <td nowrap>люкс \ люкс\и \ делюкс</td>
+        <td>{{ rus_tarif.lux_ordinary }}</td>
+    </tr>
+    <tr>
+        <td nowrap>люкс\в</td>
+        <td>{{ rus_tarif.lux_visual }}</td>
+    </tr>
+    <tr>
+        <td nowrap>служебный запрос</td>
+        <td>{{ rus_tarif.service }}</td>
+    </tr>
+    <tr>
+        <td>НДС</td>
+        <td>{{ rus_tarif.nds }}</td>
+    </tr>
+    </table>
+</td>
+<td class="t0">
+    <table>
+    <thead>
+        <tr>
+            <td>страна</td>
+            <td>простая</td>
+            <td>срочная</td>
+        </tr>
+    </thead>
+    {% for sng in sng_tarif %}
+        <tr>
+            <td class="t1">{{ sng.0 }}</td>
+            <td class="t1">{{ sng.1 }}</td>
+            <td class="t1">{{ sng.2 }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</td>
+</tr>
+</table>

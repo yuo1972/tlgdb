@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ParamTab</title>
+</head>
+<body>
+
+<table>
+    {% for par in param %}
+        <TR><TD>{{ par }}</TD></TR>
+    {% endfor %}
+    {% for parlist in param2d %}
+        <TR>
+            {% for par2 in parlist %}
+                <TD>{{ par2 }}</TD>
+            {% endfor %}
+        </TR>
+    {% endfor %}
+</table>
+
+</body>
+</html>
