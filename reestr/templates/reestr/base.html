@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titlehead %}Reestr{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'reestr/reestr.css' %}">
+    {% block popperjs-bootstrap %}
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    {% endblock %}
+    {% block javascript-bootstrap %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    {% endblock %}
+    {% block javascript %}
+        <script defer type="text/javascript" src="{% static 'reestr/reestr.js' %}"></script>
+    {% endblock %}
+    <style>
+    </style>
+</head>
+<body>
+
+
+
+{% block autorization %}
+    {% if user.is_authenticated %}
+    <span class="vdisp">
+        <div class="float-end">
+            <div class="input-group input-group-sm">
+                <div class="input-group-text">{{ user.get_username }}</div>
+                {% if request_full_path %}
+                    <a class="btn btn-sm btn-outline-success" href="{% url 'reestr:logout' %}?next={{ request_full_path }}">Выйти</a>
+                {% else %}
+                    <a class="btn btn-sm btn-outline-success" href="{% url 'reestr:logout' %}?next={{ request.path }}">Выйти</a>
+                {% endif %}
+            </div>
+        </div>
+    </span>
+    {% endif %}
+{% endblock autorization %}
+
+{% block content %}
+{% endblock %}
+
+<br><br>
+<ul id="errorAlert" class="errorlist"></ul>
+
+
+</body>
+</html>

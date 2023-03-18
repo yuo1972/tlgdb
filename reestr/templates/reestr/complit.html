@@ -1,0 +1,73 @@
+{% extends "reestr\base.html" %}
+
+{% block titlehead %}Complit{% endblock %}
+
+{% block content %}
+
+<h5 align=center>Реестр телеграмм абонента {{ name }} за {{ shape_date }}</h5>
+<span class="vdisp"><h6 align=center>{{ shape_text }}</h6></span>
+<br>
+
+<div class="row mx-2">
+
+<TABLE class="table table-light table-bordered table-hover">
+<thead>
+    <tr ALIGN=CENTER  class="table-success">
+        <th scope="col" NOWRAP>N п/п</th>
+        <th scope="col" NOWRAP>клиент</th>
+        <th scope="col" NOWRAP>к/н</th>
+        <th>куда, кому</th>
+        <th scope="col" NOWRAP>стоимость</th>
+    </tr>
+</thead>
+<tbody>
+{% if data %}
+    {% for record in data %}
+        <TR ALIGN=RIGHT >
+            <TD>{{ forloop.counter }}</TD>
+            <TD>{{ record.client.shortname }} / <b>{{ record.client.code }}</b></TD>
+            <TD ALIGN=LEFT NOWRAP>{{ record.tlg.kn }}</TD>
+            <TD ALIGN=LEFT>{{ record.tlg.address }}</TD>
+            <TD ALIGN=LEFT>{{ record.cost }}</TD>
+        </TR>
+    {% endfor %}
+{% endif %}
+</tbody>
+</TABLE>
+
+</div>
+<BR>
+<div>
+     &nbsp;Оператор:
+    {% if stage == 1 %}
+        <input type='text' size=30 maxlength=30 name='operatorname' id='operatorid' value='{{ operator }}'>
+    {% else %}
+        {{ operator }}
+    {% endif %}
+</div>
+<BR>
+
+{% url 'reestr:fixed' reestr_id as fix_url %}
+{% url 'reestr:change' reestr_id as change_url %}
+{% url 'reestr:tarification' reestr_id as tarif_url %}
+{% url 'reestr:billing_on' reestr_id as bon_url %}
+{% url 'reestr:billing_off' reestr_id as boff_url %}
+<span class="vdisp">
+{% if stage == 1 %}
+    <a class="btn btn-sm btn-success ms-2" href="{{ tarif_url }}" role="button">Назад</a>
+    <button class="btn btn-sm btn-success" type='button' onclick='fixed("{{ fix_url }}")'>Создать</button>
+{% elif stage == 2 %}
+    {% if fl_reestr %}
+        <button class="btn btn-sm btn-success ms-2" type='button' onclick='change("{{ change_url }}", "{{ tarif_url }}")'>Изменить</button>
+    {% endif %}
+    {% if fl_bill %}
+        <button class="btn btn-sm btn-success ms-2" type='button' onclick='send_cmd_and_reload("{{ bon_url }}")'>Биллинг</button>
+    {% endif %}
+{% else %}
+    {% if fl_bill %}
+        <button class="btn btn-sm btn-success ms-2" type='button' onclick='send_cmd_and_reload("{{ boff_url }}")'>Отменить биллинг</button>
+    {% endif %}
+{% endif %}
+</span>
+
+{% endblock content %}

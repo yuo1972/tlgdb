@@ -1,0 +1,77 @@
+{% extends "reestr\base.html" %}
+
+{% block javascript-bootstrap %}{% endblock %}
+{% block popperjs-bootstrap %}{% endblock %}
+
+{% block titlehead %}Select Abonents/Reestr{% endblock %}
+
+{% block content %}
+
+<h5 align=center>Реестр телеграмм абонента {{ name }} за {{ shape_date }}</h5>
+<h6 align=center>Выбрать клиентов</h6>
+<br>
+
+<form method="get" action="javascript:void(0)" name="reestr" target="_blank">
+
+<div class="'row mx-2">
+
+<TABLE class="table table-light table-bordered table-hover">
+<thead>
+    <tr ALIGN=CENTER  class="table-success">
+        <th scope="col" NOWRAP></th>
+        <th scope="col" NOWRAP>N п/п</th>
+        <th scope="col" NOWRAP>к/н</th>
+        <th scope="col" NOWRAP>дата</th>
+        <th>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspкуда,&nbspкому&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+        <th>подпись</th>
+        <th scope="col" NOWRAP>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspклиент&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+    </tr>
+</thead>
+<tbody>
+{% if data %}
+    {% for record in data %}
+    {% url 'reestr:read_tlg' record.un_name as read_url %}
+    {% url 'reestr:delete' reestr_id record.un_name as del_url %}
+    <TR ALIGN=RIGHT id="{{ reestr_id }}-{{ record.un_name }}">
+        <TD><button type="button" class="btn btn-sm btn-outline-success" id="{{ record.un_name }}" onclick='dWin.delRec(this,"{{ del_url }}")'>Х</button></TD>
+        <TD>{{ forloop.counter }}</TD>
+        <TD ALIGN=LEFT NOWRAP>{{ record.kn }}</TD>
+        <TD NOWRAP>{{ record.inp_gate_date }}</TD>
+        <TD ALIGN=LEFT>{{ record.address }}</TD>
+        <TD ALIGN=LEFT>{{ record.subscribe }}</TD>
+        <TD NOWRAP>
+            <select class="form-select" id="select-{{ record.record_id }}" aria-label="выбор абонента">
+                <option value="???" selected>???</option>
+                {% for client in client_list %}
+                    {% if record.client.id == client.id %}
+                        <option value="{{ client.id }}" selected>{{ client.shortname }}</option>
+                    {% else %}
+                        <option value="{{ client.id }}">{{ client.shortname }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </TD>
+    </TR>
+    {% endfor %}
+{% endif %}
+</tbody>
+</TABLE>
+
+
+</div>
+
+
+{% url 'reestr:add-record-hand' reestr_id as addrecordhand_url %}
+<BR>
+
+<ul id="errorAlert" class="errorlist"></ul>
+
+<a class="btn btn-sm btn-success ms-2" href="{% url 'reestr:select' %}?date={{ date }}" role="button">Назад</a>
+{% url 'reestr:tarification' reestr_id as tarification_url %}
+{% url 'reestr:set_client' as set_client_url %}
+<button class="btn btn-sm btn-success" type='button' onclick='tarification("{{ set_client_url }}","{{ tarification_url }}")'>Тарифицировать</button>
+<button class="btn btn-sm btn-success" type="reset">Сбросить</button>
+</form>
+
+
+{% endblock content %}

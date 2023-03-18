@@ -1,0 +1,59 @@
+{% extends "reestr\base.html" %}
+
+{% block popperjs-bootstrap %}{% endblock %}
+
+{% block titlehead %}Detail Clients{% endblock %}
+
+{% block content %}
+
+<h5 align="center"><b>{{ client.fullname }}</b><br>Детализация за {{ shape_date }}</h5>
+<br>
+
+<div class="row mx-2">
+    <div class="col-lg-10">
+        <TABLE class="table table-light table-bordered table-hover" id="table-billing">
+            <thead>
+                <tr ALIGN=CENTER  class="table-success">
+                    <th>дата</th>
+                    <th NOWRAP>к/номер</th>
+                    <th>кому</th>
+                    <th>тип услуги</th>
+                    <th NOWRAP>кол-во</th>
+                    <th>стоимость</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if data %}
+                {% for rec in data %}
+                        <TR>
+                            <TD NOWRAP>{{ rec.date|date:"d M Y" }}</TD>
+                            <TD>{{ rec.kn }}</TD>
+                            <TD>{{ rec.address }}</TD>
+                            <TD>{{ rec.cost_name }}</TD>
+                            <TD>{{ rec.num }}</TD>
+                            <TD>{{ rec.cost }}</TD>
+                        </TR>
+                {% endfor %}
+            {% endif %}
+
+                        <TR>
+                            <TD ALIGN=RIGHT colspan="4"><b>Всего:</b></TD>
+                            <TD></TD>
+                            <TD><b>{{ client.summ }}</b></TD>
+                        </TR>
+                        <TR  class="table-info">
+                            <TD ALIGN=RIGHT colspan="4"><b>Всего с НДС:</b></TD>
+                            <TD></TD>
+                            <TD><b>{{ client.summ_nds }}</b></TD>
+                        </TR>
+            </tbody>
+        </TABLE>
+    </div>
+
+</div>
+
+<br>
+<br>
+
+
+{% endblock content %}

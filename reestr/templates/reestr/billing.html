@@ -1,0 +1,103 @@
+{% extends "reestr\base.html" %}
+
+{% block popperjs-bootstrap %}{% endblock %}
+{% block javascript-bootstrap %}{% endblock %}
+
+{% block titlehead %}Billing Reestr{% endblock %}
+
+{% block content %}
+
+
+<h5 align=center>Реестр телеграмм за {{ shape_date }}</h5>
+<br>
+
+<div class="row mx-2">
+    <div class="col-sm col-md-6">
+        <TABLE class="table table-light table-bordered table-hover" id="table-billing">
+            <thead>
+                <tr ALIGN=CENTER  class="table-success">
+                    <th NOWRAP>N п/п</th>
+                    <th NOWRAP>оператор</th>
+                    <th NOWRAP>дата</th>
+                    <th>статус</th>
+                </tr>
+            </thead>
+            {% if data %}
+                {% for reestr in data %}
+                    <tbody id="{{ forloop.counter }}" name="tb-{{ reestr.usertlg }}">
+                        <TR ALIGN=RIGHT {{ reestr.tr_class }}>
+                            <TD>{{ forloop.counter }}</TD>
+                            <TD ALIGN=LEFT NOWRAP id="user-{{ forloop.counter }}">{{ reestr.usertlg.fullname }}</TD>
+                            <TD ALIGN=LEFT NOWRAP><a href="{{ reestr.todo_url }}">{{ reestr.date }}</a></TD>
+                            <TD ALIGN=LEFT id="status-{{ forloop.counter }}">{{ reestr.status }}</TD>
+                        </TR>
+                    </tbody>
+                {% endfor %}
+            {% endif %}
+        </TABLE>
+    </div>
+
+    <div class="col-sm col-md">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-success">
+                <b>Выбор по статусу</b>
+            </li>
+            <li class="list-group-item list-group-item-secondary">
+                <div class="row">
+                    <div class="col-1">
+                        <input class="form-check-input mt-0" type="checkbox" name="draft" id="Черновик" value="y" onchange="select_()" checked>
+                    </div>
+                    <div class="col">
+                        <label class="form-check-label" for="Черновик"> Черновик </label>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item list-group-item-warning">
+                <div class="row">
+                    <div class="col-1">
+                        <input class="form-check-input mt-0" type="checkbox" name="created" id="Сформирован" value="y" onchange="select_()" checked>
+                    </div>
+                    <div class="col">
+                        <label class="form-check-label" for="Сформирован"> Сформирован </label>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item list-group-item-info">
+                <div class="row">
+                    <div class="col-1">
+                        <input class="form-check-input mt-0" type="checkbox" name="closed" id="Закрыт" value="y" onchange="select_()" checked>
+                    </div>
+                    <div class="col">
+                        <label class="form-check-label" for="Закрыт"> Закрыт </label>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-sm col-md">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-success">
+                <b>Выбор по оператору</b>
+            </li>
+            {% for op in operators %}
+                <li class="list-group-item list-group-item-secondary">
+                    <div class="row">
+                        <div class="col-1">
+                            <input class="form-check-input mt-0" type="checkbox" name="op" id="{{ op }}" value="y" onchange="select_()" checked>
+                        </div>
+                        <div class="col">
+                            <label class="form-check-label" for="{{ op }}"> {{ op }} </label>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<br>
+<br>
+
+
+{% endblock content %}

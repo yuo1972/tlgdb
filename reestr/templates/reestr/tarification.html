@@ -1,0 +1,153 @@
+{% extends "reestr\base.html" %}
+
+{% block titlehead %}Tarification{% endblock %}
+
+{% block content %}
+
+<h5 align=center>Реестр телеграмм абонента {{ name }} за {{ shape_date }}</h5>
+<h6 align=center>Тарифицировать</h6>
+<br>
+
+<!--<form method="get" action="javascript:void(0)" name="reestr" target="_blank">-->
+
+<div class="row mx-2">
+
+<TABLE class="table table-light table-bordered table-hover">
+<thead>
+    <tr ALIGN=CENTER  class="table-success">
+        <th scope="col" NOWRAP>N п/п</th>
+        <th scope="col" NOWRAP>клиент</th>
+        <th scope="col" NOWRAP>к/н</th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;куда,&nbspкому&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th NOWRAP>р/т</th>
+        <th scope="col" NOWRAP>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;страна&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th NOWRAP>к/слов</th>
+        <th scope="col" NOWRAP>категория</th>
+        <th scope="col" NOWRAP>уведомление</th>
+        <th scope="col" NOWRAP>люкс</th>
+        <th scope="col" NOWRAP>вручить</th>
+        <th scope="col" NOWRAP>служ</th>
+        <th scope="col" NOWRAP>стоимость</th>
+        <th scope="col" NOWRAP>с НДС</th>
+    </tr>
+</thead>
+<tbody>
+{% if data %}
+    {% for record in data %}
+    {% url 'reestr:update_record' record.id as upd_rec_url %}
+    {% url 'reestr:update_numword' record.id as upd_num_url %}
+    {% url 'reestr:reset_record' record.id as reset_rec_url %}
+    {% url 'reestr:save_record' record.id as save_rec_url %}
+    <TR ALIGN=RIGHT id="{{ reestr_id }}-{{ record.id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title=" {{ record.alarm }}">
+        <TD>{{ forloop.counter }}</TD>
+        <TD>{{ record.client.shortname }}</TD>
+        <TD ALIGN=LEFT NOWRAP>{{ record.tlg.kn }}</TD>
+        <TD ALIGN=LEFT>{{ record.tlg.address }}</TD>
+
+        <TD ALIGN=LEFT>
+            <input class="form-check-input mt-0" type="checkbox" name="chkautocost-{{ record.id }}" value="1" id="chkautocost-{{ record.id }}" {{ record.checked }} onchange='change_autocost(this,"{{ upd_rec_url }}")'>
+        </TD>
+
+        <TD NOWRAP class="align-bottom">
+            <select class="form-select mb-1" id="selcountry-{{ record.id }}" aria-label="страна" onchange='update_record(this,"{{ upd_rec_url }}", "country")'>
+                {% for country in country_list %}
+                    {% if record.country == country %}
+                        <option value="{{ country }}" selected>{{ country }}</option>
+                    {% else %}
+                        <option value="{{ country }}">{{ country }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </TD>
+
+        <TD NOWRAP class="align-bottom">
+            <div class="row px-2 py-1">
+                <button class="btn btn-sm btn-outline-success" id='btnresetrec-{{ record.id }}' type='button' onclick='update_record(this,"{{ reset_rec_url }}")' {{ record.reset_hidden }}>Сбросить</button>
+                <button class="btn btn-sm btn-success" id='btncalcrec-{{ record.id }}' type='button' onclick='calculate_record(this,"{{ upd_num_url }}")' {{ record.calculate_hidden }}>Рассчитать</button>
+            </div>
+            <input type='text' size=6 maxlength=7 name='inpnumword-{{ record.id }}' id='inpnumword-{{ record.id }}' value='{{ record.num_word }}' {{ record.disabled }}>
+        </TD>
+
+        <TD NOWRAP class="align-bottom">
+            <select class="form-select mb-1" id="selurgent-{{ record.id }}" aria-label="срочность" onchange='update_record(this,"{{ upd_rec_url }}", "urgent")'>
+                {% for tu in typeUrg %}
+                    {% if record.typeUrg == tu.0 %}
+                        <option value="{{ tu.0 }}" selected>{{ tu.1 }}</option>
+                    {% else %}
+                        <option value="{{ tu.0 }}">{{ tu.1 }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type='text' size=6 maxlength=7 name='inpurgdeliv-{{ record.id }}' id='inpurgdeliv-{{ record.id }}' value='{{ record.cost_deliv }}' {{ record.disabled }}>
+            <input type='text' size=6 maxlength=7 name='inpurgword-{{ record.id }}' id='inpurgword-{{ record.id }}' value='{{ record.cost_word }}' {{ record.disabled }}>
+        </TD>
+
+        <TD NOWRAP class="align-bottom">
+            <select class="form-select mb-1" id="selnotif-{{ record.id }}" aria-label="уведомление" onchange='update_record(this,"{{ upd_rec_url }}", "notification")'>
+                {% for tn in typeNot %}
+                    {% if record.typeNot == tn.0 %}
+                        <option value="{{ tn.0 }}" selected>{{ tn.1 }}</option>
+                    {% else %}
+                        <option value="{{ tn.0 }}">{{ tn.1 }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type='text' size=10 maxlength=7 name='inpnotif-{{ record.id }}' id='inpnotif-{{ record.id }}' value='{{ record.cost_notif }}' {{ record.disabled }}>
+        </TD>
+
+        <TD NOWRAP class="align-bottom">
+            <select class="form-select mb-1" id="sellux-{{ record.id }}" aria-label="люкс" onchange='update_record(this,"{{ upd_rec_url }}", "lux")'>
+                {% for tl in typeLux %}
+                    {% if record.typeLX == tl.0 %}
+                        <option value="{{ tl.0 }}" selected>{{ tl.1 }}</option>
+                    {% else %}
+                        <option value="{{ tl.0 }}">{{ tl.1 }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type='text' size=10 maxlength=7 name='inplux-{{ record.id }}' id='inplux-{{ record.id }}' value='{{ record.cost_lux }}' {{ record.disabled }}>
+        </TD>
+
+        <TD ALIGN=LEFT class="align-bottom">
+        {% if record.todate_bool %}
+            <input class="form-check-input mt-0" type="checkbox" name="chktodate-{{ record.id }}" value="1" id="chktodate-{{ record.id }}" checked onchange='update_record_chekbox(this,"{{ upd_rec_url }}", "todate")'>
+        {% else %}
+            <input class="form-check-input mt-0" type="checkbox" name="chktodate-{{ record.id }}" value="1" id="chktodate-{{ record.id }}" onchange='update_record_chekbox(this,"{{ upd_rec_url }}", "todate")'>
+        {% endif %}
+            <input type='text' size=6 maxlength=7 name='inptodate-{{ record.id }}' id='inptodate-{{ record.id }}' value='{{ record.cost_todate }}' {{ record.disabled }}>
+        </TD>
+
+        <TD ALIGN=LEFT class="align-bottom">
+        {% if record.kkv_bool %}
+            <input class="form-check-input mt-0" type="checkbox" name="chkkkv-{{ record.id }}" value="1" id="chkkkv-{{ record.id }}" checked onchange='update_record_chekbox(this,"{{ upd_rec_url }}", "kkv")'>
+        {% else %}
+            <input class="form-check-input mt-0" type="checkbox" name="chkkkv-{{ record.id }}" value="1" id="chkkkv-{{ record.id }}" onchange='update_record_chekbox(this,"{{ upd_rec_url }}", "kkv")'>
+        {% endif %}
+            <input type='text' size=6 maxlength=7 name='inpkkv-{{ record.id }}' id='inpkkv-{{ record.id }}' value='{{ record.cost_service }}' {{ record.disabled }}>
+        </TD>
+
+        <TD ALIGN=LEFT class="align-bottom">
+            <input type='text' size=7 maxlength=8 name='inpsumm-{{ record.id }}' id='inpsumm-{{ record.id }}' value='{{ record.cost }}' {{ record.disabled }}>
+        </TD>
+
+        <TD ALIGN=LEFT class="align-bottom">
+            <div class="row px-2 py-1">
+                <button class="btn btn-sm btn-danger" id='btnsaverec-{{ record.id }}' type='button' onclick='save_record(this,"{{ save_rec_url }}")' {{ record.calculate_hidden }}>Сохранить</button>
+            </div>
+            <input type='text' size=7 maxlength=8 name='inpnds-{{ record.id }}' id='inpnds-{{ record.id }}' value='{{ record.cost_nds }}' {{ record.disabled }}>
+        </TD>
+    </TR>
+    {% endfor %}
+{% endif %}
+</tbody>
+</TABLE>
+
+
+</div>
+<BR>
+
+<a class="btn btn-sm btn-success ms-2" href="{% url 'reestr:list' reestr_id %}" role="button">Назад</a>
+<a class="btn btn-sm btn-success" href="{% url 'reestr:complit' reestr_id %}" role="button">Подтвердить</a>
+<!--</form>-->
+
+{% endblock content %}

@@ -1,0 +1,49 @@
+{% extends "reestr\base.html" %}
+
+{% block popperjs-bootstrap %}{% endblock %}
+
+{% block titlehead %}Detail Clients{% endblock %}
+
+{% block content %}
+
+
+<h5 align=center>Детализация за {{ shape_date }}</h5>
+<br>
+
+<div class="row mx-2">
+    <div class="col-md-9 col-lg-8 col-xl-7">
+        <TABLE class="table table-light table-bordered table-hover" id="table-billing">
+            <thead>
+                <tr ALIGN=CENTER  class="table-success">
+                    <th NOWRAP>N п/п</th>
+                    <th NOWRAP>код</th>
+                    <th NOWRAP>название</th>
+                    <th>email</th>
+                    <th>сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if clients %}
+                {% for client in clients %}
+                        {% url 'reestr:detail_client' client.id shape_date as det_url %}
+                        {% url 'reestr:send_detail' client.id shape_date as send_url %}
+                        <TR ALIGN=RIGHT {{ reestr.tr_class }}>
+                            <TD>{{ forloop.counter }}</TD>
+                            <TD ALIGN=LEFT>{{ client.code }}</TD>
+                            <TD ALIGN=LEFT><a href="{{ det_url }}">{{ client.fullname }}</a></TD>
+                            <TD ALIGN=LEFT><a href="{{ send_url }}">{{ client.email }}</a></TD>
+                            <TD ALIGN=LEFT>{{ client.summ }}</TD>
+                        </TR>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </TABLE>
+    </div>
+
+</div>
+
+<br>
+<br>
+
+
+{% endblock content %}
